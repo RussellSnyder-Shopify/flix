@@ -1,5 +1,11 @@
 <ul>
 <% @movies.each do |movie| %>
-    <li><%= movie %>
+    <li>
+        <strong><%= movie.title %></strong> (<%= movie.rating %>): <%= total_gross(movie) %><br/>
+        <i>Released: <%= year_of(movie) %></i>
+        <p>
+            <%= truncate(movie.description, length: 40, seperator: ' ') %>
+        </p>
+    </li>
 <% end %>
 </ul>
