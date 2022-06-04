@@ -11,7 +11,10 @@
   <body>
     <div class="inner-container min-h-screen -mb-20 pb-40">
       <%= render "layouts/header" %>
-      <div class="container mx-auto"><%= yield %></div>
+      <div class="container mx-auto">
+        <%= render "layouts/flash" %>
+        <%= yield %>
+      </div>
     </div>
     <%= render "layouts/footer" %>
   </body>

@@ -15,9 +15,12 @@
     id: id,
     title: Faker::Movie.title,
     rating: rating,
-    total_gross: Faker::Number.normal(mean: 250_000_000, standard_deviation: 100_000_000),
+    director: Faker::Name.name,
+    duration: "#{Faker::Number.between(from: 1, to: 2)} Hours and #{Faker::Number.between(from: 0, to: 59)} Minutes",
+    total_gross: Faker::Number.normal(mean: 200_000_000, standard_deviation: 75_000_000),
     created_at: default_date,
     updated_at: default_date,
+    image_file_name: "cat#{Faker::Number.between(from: 1, to: 4)}.jpeg",
     description: "#{Faker::Movie.quote} #{Faker::Lorem.sentence(word_count: 30, supplemental: false,
                                                                 random_words_to_add: 20)}",
     released_on: Faker::Date.between(from: '1995-09-23', to: '2030-09-25')

@@ -1,0 +1,19 @@
+<% if flash[:notice] %>
+  <div id="flash-message" class="overflow-hidden opacity-0 transition-all h-0 bg-green-200 text-center text-2xl">
+    <div class="p-5 relative">
+      <%= flash[:notice] %>
+      <span id="close-flash-message" class="absolute right-0 top-0 p-2">X</span>
+    </div>
+  </div>
+<% end %>
+<% if flash[:alert]  %>
+  <div id="flash-message" class="overflow-hidden opacity-0 transition-all h-0 bg-amber-200 text-center text-2xl">
+    <div class="p-5 relative">
+      <%= flash[:alert] %>
+      <span id="close-flash-message" class="absolute right-0 top-0 p-2">X</span>
+    </div>
+  </div>
+<% end %>
+<% if flash[:notice] || flash[:alert] %>
+  <%= javascript_pack_tag 'flash' %>
+<% end %>
