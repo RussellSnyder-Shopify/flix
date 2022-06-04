@@ -20,6 +20,6 @@
     updated_at: default_date,
     description: "#{Faker::Movie.quote} #{Faker::Lorem.sentence(word_count: 30, supplemental: false,
                                                                 random_words_to_add: 20)}",
-    released_on: Faker::Date.between(from: '1995-09-23', to: '2020-09-25')
+    released_on: Faker::Date.between(from: '1995-09-23', to: '2030-09-25')
   )
 end
