@@ -2,6 +2,8 @@
   <h2 class="mb-5"><%= @movie.title %></h2>
   <h3 class="mb-3"><%= total_gross(@movie) %></h3>
   <p>
+    Released: <strong><%= @movie.released_on.year %></strong><br/>
+    Rated: <strong><%= @movie.rating %></strong><br/>
     <%= @movie.description %>
   </p>
 </section>
