@@ -1,4 +1,6 @@
 <section>
+  <%= image_tag(@movie.image_file_name, :class => "object-cover w-auto
+                h-40 mb-20", :alt => "Movie poster") %>
   <h2 class="mb-5"><%= @movie.title %></h2>
   <h3 class="mb-3"><%= total_gross(@movie) %></h3>
   <p>
