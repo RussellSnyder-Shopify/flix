@@ -1,11 +1,11 @@
-<ul>
-<% @movies.each do |movie| %>
-    <li>
-        <strong><%= movie.title %></strong> (<%= movie.rating %>): <%= total_gross(movie) %><br/>
-        <i>Released: <%= year_of(movie) %></i>
-        <p>
-            <%= truncate(movie.description, length: 40, seperator: ' ') %>
-        </p>
-    </li>
-<% end %>
-</ul>
+<div class="grid grid-cols-1 divide-y">
+  <% @movies.each do |movie| %>
+    <section class="py-3">
+      <h2><%= link_to movie.title, movie %></h2>
+      <h3><%= total_gross(movie) %></h3>
+      <p>
+        <%= truncate(movie.description, length: 150, seperator: ' ') %>
+      </p>
+    </section>
+  <% end %>
+</div>
