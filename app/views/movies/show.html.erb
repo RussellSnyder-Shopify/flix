@@ -9,4 +9,8 @@
 </section>
 <section class="admin mt-10">
   <%= link_to "Edit", edit_movie_path(@movie), class: "btn btn-primary" %>
+  <%= link_to "Delete", @movie, class: "btn btn-error", method: :delete, 
+  data: {
+    confirm: "Really?"
+  } %>
 </section>

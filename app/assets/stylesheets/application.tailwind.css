@@ -32,6 +32,22 @@
     @apply bg-blue-700;
     cursor: pointer;
   }
+
+  .btn-error {
+    @apply bg-red-500 text-white;
+  }
+  .btn-error:hover {
+    @apply bg-red-700;
+    cursor: pointer;
+  }
+
+  .btn-warning {
+    @apply bg-orange-500 text-white;
+  }
+  .btn-warning:hover {
+    @apply bg-orange-700;
+    cursor: pointer;
+  }
 }
 
 
