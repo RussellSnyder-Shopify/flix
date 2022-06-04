@@ -1,0 +1,10 @@
+<section>
+  <h2 class="mb-5"><%= @movie.title %></h2>
+  <h3 class="mb-3"><%= total_gross(@movie) %></h3>
+  <p>
+    <%= @movie.description %>
+  </p>
+</section>
+<section class="admin mt-10">
+  <%= link_to "Edit", edit_movie_path(@movie), class: "btn btn-primary" %>
+</section>
