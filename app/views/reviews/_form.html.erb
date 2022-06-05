@@ -1,0 +1,22 @@
+<%= form_with(model: [movie, review], local: true, class: "lg:w-1/2 mx-auto") do |f| %>
+  <%= render "shared/errors", object: review %>
+  <div class="mb-4">
+    <%= f.label :name, class: "form-label" %>
+    <%= f.text_field :name, class: "form-text-input", autofocus: true %>
+  </div>
+  <div class="mb-4">
+    <%= f.label :stars, class: "form-label" %>
+    <%# <%= f.select :stars, Review::STARS, prompt: "Pick a rating out of 5", class: "form-text-input" %>
+    <% Review::STARS.each do |star| %>
+      <%= f.radio_button :stars, star %>
+      <%= label_tag star %>
+    <% end %>
+  </div>
+  <div class="mb-4">
+    <%= f.label :comment, class: "form-label" %>
+    <%= f.text_area :comment, rows: 7, class: "form-text-input", placeholder: "What did you think?" %>
+  </div>
+  <div class="mb-4">
+    <%= f.submit class: 'btn btn-primary' %>
+  </div>
+<% end %>

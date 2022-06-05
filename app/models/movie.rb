@@ -1,6 +1,8 @@
 class Movie < ApplicationRecord
   RATINGS = %w[G PG PG-13 R NC-17].freeze
 
+  has_many :reviews, dependent: :destroy
+
   validates :title, :released_on, :duration, presence: true
 
   validates :description, length: {
@@ -16,6 +18,11 @@ class Movie < ApplicationRecord
 
   def flop?
     total_gross.blank? || total_gross < 225_000_000
+  end
+
+  def score
+    stars = reviews.collect(&:stars)
+    (stars.sum.to_f / stars.count.to_f).round(2)
   end
 
   def self.released
