@@ -1,1 +1,3 @@
-This is tthe practice app from Pragmatic Studio Rails course
+This is the practice app from Pragmatic Studio Rails course.
+
+
