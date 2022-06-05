@@ -1,0 +1,24 @@
+<div class="grid grid-cols-1 divide-y">
+  <% @movies.each do |movie| %>
+    <section class="grid grid-cols-4 gap-5 py-10">
+      <div class="image col-span-1 text-center flex">
+        <%= image_tag(movie.image_file_name, :class => "self-center object-cover w-auto
+                h-15", :alt => "Flix Logo") %>
+      </div>
+      <div class="flex col-span-3 flex-col space-y-5">
+        <h2><%= link_to movie.title, movie %></h2>
+        <div class="grid grid-cols-3 divide-x-4 text-center">
+          <div><%= total_gross(movie) %></div>
+          <div><%= movie.director %></div>
+          <div><%= movie.duration %></div>
+        </div>
+        <p>
+          <%= truncate(movie.description, length: 150, seperator: ' ') %>
+        </p>
+      </div>
+    </section>
+  <% end %>
+</div>
+<section class="admin mt-10">
+  <%= link_to "New", new_movie_path, class: "btn btn-primary" %>
+</section>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Flix</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <%= csrf_meta_tags %> <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <div class="inner-container min-h-screen -mb-20 pb-40">
+      <%= render "layouts/header" %>
+      <div class="container mx-auto">
+        <%= render "layouts/flash" %>
+        <%= yield %>
+      </div>
+    </div>
+    <%= render "layouts/footer" %>
+  </body>
+</html>
