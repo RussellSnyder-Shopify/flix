@@ -1,0 +1,11 @@
+<section>
+  <h1><%= @user.name %></h1>
+  <h2><%= mail_to(@user.email) %></h2>
+  <% if @user.username.length > 0 %>
+    <h2>Username: <%= @user.username %></h2>
+  <% end %>
+  <div class="actions">
+    <%= link_to "Edit Account", edit_user_path(@user), class: "btn btn-primary" %>
+    <%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-error" %>
+  </div>
+</section>
