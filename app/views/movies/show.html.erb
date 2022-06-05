@@ -9,7 +9,7 @@
     <%= @movie.description %>
   </p>
   <div class="reviews my-4">
-    Average Score: <%= @movie.score %> / 5 stars
+    <%= render 'reviews/stars', percent: @movie.average_stars_as_percent %><%= @movie.average_stars %>
   </div>
   <%= link_to "See movie Reviews", movie_reviews_path(@movie), class: "btn btn-primary" %>
 </section>
