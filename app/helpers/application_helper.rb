@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def has_username?(user)
+    user&.username&.length&.positive?
   end
 end
