@@ -2,6 +2,14 @@
   <%= image_tag(@movie.image_file_name, :class => "object-cover w-auto
                 h-40 mb-3", :alt => "Movie poster") %>
   <h2 class="mb-5"><%= @movie.title %></h2>
+  <% if current_user %>
+    <div>
+      <%= like_of_unlike_button(@movie, @favorite) %>
+      <div class="count">
+        <%= @movie.favorited_by.size %>
+      </div>
+    </div>
+  <% end %>
   <h3 class="mb-3"><%= total_gross(@movie) %></h3>
   <p>
     Released: <strong><%= @movie.released_on.year %></strong><br/>
@@ -12,6 +20,7 @@
     <%= render 'shared/stars', percent: @movie.average_stars_as_percent %><%= @movie.average_stars %>
   </div>
   <%= link_to "See movie Reviews", movie_reviews_path(@movie), class: "btn btn-primary" %>
+  <strong><%= pluralize(@movie.favorited_by.size, "Person") %> has this on their favorites list</strong>
 </section>
 <section class="mb-10">
   <h2>Write your own review!</h2>

@@ -12,15 +12,30 @@
   <% end %>
 </section>
 <section class="mb-10">
-  <h2>Reviews</h2>
-  <% if @user.reviews.length > 0 %>
-    <% @user.reviews.each do |review| %>
-      <%= render 'reviews/review', movie: review.movie, review: review %>
-    <% end %>
+  <h2>Favorite Movies</h2>
+  <% if @user.favorite_movies.length > 0 %>
+    <ul>
+      <% @user.favorite_movies.each do |movie| %>
+        <li><%= link_to movie.title, movie %></li>
+      <% end %>
+    </ul>
   <% else %>
-    <p>No Reviews yet</P>
+    <p>No Favorites</P>
     <p>
-      <%= link_to "Pick a movie to review", movies_path %>
+      <%= link_to "Pick a movie to favorite", movies_path %>
     </p>
   <% end %>
-</section>
+  <section>
+    <section class="mb-10">
+      <h2>Reviews</h2>
+      <% if @user.reviews.length > 0 %>
+        <% @user.reviews.each do |review| %>
+          <%= render 'reviews/review', movie: review.movie, review: review %>
+        <% end %>
+      <% else %>
+        <p>No Reviews yet</P>
+        <p>
+          <%= link_to "Pick a movie to review", movies_path %>
+        </p>
+      <% end %>
+    </section>
