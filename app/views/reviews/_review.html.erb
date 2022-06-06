@@ -1,0 +1,20 @@
+<section class="grid grid-cols-6 gap-2 py-10 divide-x divide-x-2 divide-black text-center">
+  <div class="image text-left">
+    <%= render 'shared/stars', percent: review.stars_as_percent %>
+  </div>
+  <div><%= link_to review.user.name, review.user %></div>
+  <p>
+    <%= review.comment %>
+  </p>
+  <p>
+    <%= time_ago_in_words(review.updated_at) %> ago
+  </p>
+  <p>
+    <%= link_to "delete", movie_review_path(movie, review), method: :delete,   data: {
+        confirm: "Delete #{review.user.name}'s Review?"
+          }, class: "btn btn-error" %>
+  </p>
+  <p>
+    <%= link_to "edit", edit_movie_review_path(movie, review), class: "btn btn-primary" %>
+  </p>
+</section>

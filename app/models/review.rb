@@ -1,9 +1,8 @@
 class Review < ApplicationRecord
-  STARS = [0, 1, 2, 3, 4, 5].freeze
-
   belongs_to :movie
+  belongs_to :user
 
-  validates :name, :comment, presence: true
+  STARS = [0, 1, 2, 3, 4, 5].freeze
 
   validates :stars, inclusion: { in: STARS }
 

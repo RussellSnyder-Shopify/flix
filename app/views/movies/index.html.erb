@@ -19,6 +19,8 @@
     </section>
   <% end %>
 </div>
-<section class="admin mt-10">
-  <%= link_to "New", new_movie_path, class: "btn btn-primary" %>
-</section>
+<% if current_user_admin? %>
+  <section class="admin mt-10">
+    <%= link_to "New", new_movie_path, class: "btn btn-primary" %>
+  </section>
+<% end %>

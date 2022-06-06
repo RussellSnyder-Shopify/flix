@@ -9,7 +9,7 @@
     <%= @movie.description %>
   </p>
   <div class="reviews my-4">
-    <%= render 'reviews/stars', percent: @movie.average_stars_as_percent %><%= @movie.average_stars %>
+    <%= render 'shared/stars', percent: @movie.average_stars_as_percent %><%= @movie.average_stars %>
   </div>
   <%= link_to "See movie Reviews", movie_reviews_path(@movie), class: "btn btn-primary" %>
 </section>
@@ -17,10 +17,12 @@
   <h2>Write your own review!</h2>
   <%= render "reviews/form", movie: @movie, review: @review %>
 </section>
-<section class="admin mb-10">
-  <%= link_to "Edit", edit_movie_path(@movie), class: "btn btn-primary" %>
-  <%= link_to "Delete", @movie, class: "btn btn-error", method: :delete, 
+<% if current_user_admin? %>
+  <section class="admin mb-10">
+    <%= link_to "Edit", edit_movie_path(@movie), class: "btn btn-primary" %>
+    <%= link_to "Delete", @movie, class: "btn btn-error", method: :delete, 
   data: {
     confirm: "Really?"
   } %>
-</section>
+  </section>
+<% end %>

@@ -1,13 +1,26 @@
-<section>
+<section class="mb-10">
   <h1><%= @user.name %></h1>
   <h2><%= mail_to(@user.email) %></h2>
   <% if has_username?(@user) %>
     <h2>Username: <%= @user.username %></h2>
   <% end %>
   <% if current_user?(@user) %>
-    <div class="actions">
+    <div class="actions mt-4">
       <%= link_to "Edit Account", edit_user_path(@user), class: "btn btn-primary" %>
       <%= link_to "Delete Account", @user, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-error" %>
     </div>
+  <% end %>
+</section>
+<section class="mb-10">
+  <h2>Reviews</h2>
+  <% if @user.reviews.length > 0 %>
+    <% @user.reviews.each do |review| %>
+      <%= render 'reviews/review', movie: review.movie, review: review %>
+    <% end %>
+  <% else %>
+    <p>No Reviews yet</P>
+    <p>
+      <%= link_to "Pick a movie to review", movies_path %>
+    </p>
   <% end %>
 </section>
