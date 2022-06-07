@@ -14,7 +14,7 @@
   default_date = Faker::Date.between(from: '1995-09-23', to: '2020-09-25')
 
   Movie.create!(
-    title: Faker::Movie.title,
+    title: Faker::Movie.unique.title,
     rating: rating,
     director: Faker::Name.name,
     duration: "#{Faker::Number.between(from: 1, to: 2)} Hours and #{Faker::Number.between(from: 0, to: 59)} Minutes",

@@ -1,4 +1,6 @@
 class Movie < ApplicationRecord
+  before_save :set_slug
+
   RATINGS = %w[G PG PG-13 R NC-17].freeze
 
   PUBLIC_FILTERS = %w[upcoming recent hitis flops]
@@ -13,7 +15,8 @@ class Movie < ApplicationRecord
   has_many :characterizations, dependent: :destroy
   has_many :genres, through: :characterizations
 
-  validates :title, :released_on, :duration, presence: true
+  validates :released_on, :duration, presence: true
+  validates :title, presence: true, uniqueness: true
 
   validates :description, length: {
     minimum: 25
@@ -62,4 +65,14 @@ class Movie < ApplicationRecord
   scope :flops, lambda {
     released.where('total_gross < ?', FLOP_THRESHOLD).order(total_gross: :asc)
   }
+
+  def to_param
+    title.parameterize
+  end
+
+  private
+
+  def set_slug
+    self.slug = title.parameterize
+  end
 end
