@@ -8,6 +8,8 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
+  get 'movies/filter/:filter' => 'movies#index', as: :filtered_movies
+
   resource :session, only: %i[new create destroy].freeze
 
   resources :users

@@ -22,4 +22,12 @@ class User < ApplicationRecord
   def super_admin?
     role == 'SuperAdmin'
   end
+
+  scope :by_name, lambda {
+    order(:name)
+  }
+
+  scope :not_admins, lambda {
+    by_name.where('role = "User"')
+  }
 end

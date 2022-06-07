@@ -18,4 +18,14 @@ module MoviesHelper
       ActionController::Base.helpers.pluralize(movie.average_stars.round(1).to_f, 'star')
     end
   end
+
+  def nav_link_to(text, url)
+    if current_page?(url)
+
+      link_to(text, url, class: 'text-blue-600')
+    else
+      link_to(text, url)
+
+    end
+  end
 end

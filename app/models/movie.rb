@@ -1,7 +1,12 @@
 class Movie < ApplicationRecord
   RATINGS = %w[G PG PG-13 R NC-17].freeze
 
-  has_many :reviews, dependent: :destroy
+  PUBLIC_FILTERS = %w[upcoming recent hitis flops]
+
+  HIT_THRESHOLD = 300_000_000
+  FLOP_THRESHOLD = 22_500_000
+
+  has_many :reviews, -> { order(created_at: :desc) }, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorited_by, through: :favorites, source: :user
 
@@ -22,7 +27,7 @@ class Movie < ApplicationRecord
   }
 
   def flop?
-    total_gross.blank? || total_gross < 225_000_000
+    total_gross.blank? || total_gross < FLOP_THRESHOLD
   end
 
   def score
@@ -38,7 +43,23 @@ class Movie < ApplicationRecord
     (average_stars / 5.0) * 100
   end
 
-  def self.released
+  scope :upcoming, lambda {
+    where('released_on > ?', Time.now).order('released_on asc')
+  }
+
+  scope :released, lambda {
     where('released_on < ?', Time.now).order('released_on desc')
-  end
+  }
+
+  scope :recent, lambda { |max = 5|
+    released.limit(max)
+  }
+
+  scope :hits, lambda {
+    released.where('total_gross > ?', FLOP_THRESHOLD).order(total_gross: :desc)
+  }
+
+  scope :flops, lambda {
+    released.where('total_gross < ?', FLOP_THRESHOLD).order(total_gross: :asc)
+  }
 end
