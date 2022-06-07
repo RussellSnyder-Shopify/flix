@@ -11,9 +11,9 @@
     </div>
   <% end %>
   <h3 class="mb-3"><%= total_gross(@movie) %></h3>
-  <% if @movie.categories.present? %>
+  <% if @movie.genres.present? %>
     <h3 class="mb-3">
-      Categories: <%= @movie.categories.map(&:name).join(", ") %>
+      genres: <%= @movie.genres.map(&:name).join(", ") %>
     </h3>
   <% end %>
   <p>

@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resource :session, only: %i[new create destroy].freeze
 
   resources :users
+  resources :genres
 
   get 'signup' => 'users#new'
   get 'signin' => 'sessions#new'
