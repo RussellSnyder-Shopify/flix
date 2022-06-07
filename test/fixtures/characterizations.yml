@@ -2,8 +2,8 @@
 
 one:
   movie: one
-  category: one
+  genre: one
 
 two:
   movie: two
-  category: two
+  genre: two

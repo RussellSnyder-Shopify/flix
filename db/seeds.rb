@@ -31,9 +31,9 @@ end
 (1..10).each do |_i|
   genre = Faker::Book.genre
 
-  next if Category.find_by(name: genre)
+  next if Genre.find_by(name: genre)
 
-  Category.create!(
+  Genre.create!(
     name: genre
   )
 end
@@ -49,17 +49,17 @@ end
 end
 
 movies = Movie.all
-categories = Category.all
+genres = Genre.all
 users = User.all
 
 movies.each do |movie|
-  category_ids = Set[]
+  genre_ids = Set[]
 
-  Array.new(Faker::Number.between(from: 1, to: categories.size)).each do |_i|
-    category_ids.add(Faker::Number.between(from: 1, to: categories.size))
+  Array.new(Faker::Number.between(from: 1, to: genres.size)).each do |_i|
+    genre_ids.add(Faker::Number.between(from: 1, to: genres.size))
   end
 
-  movie.category_ids = category_ids
+  movie.genre_ids = genre_ids
 end
 
 users.each do |user|

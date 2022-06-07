@@ -10,21 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_07_063614) do
+ActiveRecord::Schema.define(version: 2022_06_07_074133) do
 
-  create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "categorizations", force: :cascade do |t|
+  create_table "characterizations", force: :cascade do |t|
     t.integer "movie_id", null: false
-    t.integer "category_id", null: false
+    t.integer "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["category_id"], name: "index_categorizations_on_category_id"
-    t.index ["movie_id"], name: "index_categorizations_on_movie_id"
+    t.index ["genre_id"], name: "index_characterizations_on_genre_id"
+    t.index ["movie_id"], name: "index_characterizations_on_movie_id"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -34,6 +28,12 @@ ActiveRecord::Schema.define(version: 2022_06_07_063614) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["movie_id"], name: "index_favorites_on_movie_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "movies", force: :cascade do |t|
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(version: 2022_06_07_063614) do
     t.string "role", default: "User"
   end
 
-  add_foreign_key "categorizations", "categories"
-  add_foreign_key "categorizations", "movies"
+  add_foreign_key "characterizations", "genres"
+  add_foreign_key "characterizations", "movies"
   add_foreign_key "favorites", "movies"
   add_foreign_key "favorites", "users"
   add_foreign_key "reviews", "movies"
