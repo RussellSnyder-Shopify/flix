@@ -7,12 +7,13 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 (1..30).each do |id|
-  rating = id % 3 == 0 ? 'PG' : 'PG 13'
+  rating = id.even? ? 'PG' : 'PG 13'
+  rating = id % 5 == 0 ? 'R' : rating
+  rating = id % 7 == 0 ? 'G' : rating
 
   default_date = Faker::Date.between(from: '1995-09-23', to: '2020-09-25')
 
   Movie.create!(
-    id: id,
     title: Faker::Movie.title,
     rating: rating,
     director: Faker::Name.name,
@@ -25,4 +26,57 @@
                                                                 random_words_to_add: 20)}",
     released_on: Faker::Date.between(from: '1995-09-23', to: '2030-09-25')
   )
+end
+
+(1..10).each do |_i|
+  genre = Faker::Book.genre
+
+  next if Category.find_by(name: genre)
+
+  Category.create!(
+    name: genre
+  )
+end
+
+(1..10).each do |i|
+  User.create!(
+    name: Faker::Name.unique.name,
+    email: Faker::Internet.email,
+    password: 'passwordpassword',
+    role: User::ROLES[Faker::Number.between(from: 0, to: User::ROLES.size - 1)],
+    username: i.even? ? 'username is here' : nil
+  )
+end
+
+movies = Movie.all
+categories = Category.all
+users = User.all
+
+movies.each do |movie|
+  category_ids = Set[]
+
+  Array.new(Faker::Number.between(from: 1, to: categories.size)).each do |_i|
+    category_ids.add(Faker::Number.between(from: 1, to: categories.size))
+  end
+
+  movie.category_ids = category_ids
+end
+
+users.each do |user|
+  favorite_movies = Set[]
+
+  Array.new(Faker::Number.between(from: 1, to: movies.size)).each do |_i|
+    favorite_movies.add(Movie.find(Faker::Number.between(from: 1, to: movies.size)))
+  end
+
+  user.favorite_movies = favorite_movies
+
+  Array.new(Faker::Number.between(from: 1, to: 10)).each do |_i|
+    Review.create!(
+      user: user,
+      stars: Faker::Number.between(from: 0, to: 5),
+      comment: Faker::Lorem.paragraph(sentence_count: Faker::Number.between(from: 1, to: 5)),
+      movie_id: Faker::Number.between(from: 1, to: movies.size)
+    )
+  end
 end
