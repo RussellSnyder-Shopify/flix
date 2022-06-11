@@ -18,14 +18,18 @@
     rating: rating,
     director: Faker::Name.name,
     duration: "#{Faker::Number.between(from: 1, to: 2)} Hours and #{Faker::Number.between(from: 0, to: 59)} Minutes",
-    total_gross: Faker::Number.normal(mean: 200_000_000, standard_deviation: 75_000_000),
+    total_gross: Faker::Number.normal(mean: 250_000_000, standard_deviation: 1_000_000),
     created_at: default_date,
     updated_at: default_date,
-    image_file_name: "cat#{Faker::Number.between(from: 1, to: 4)}.jpeg",
-    description: "#{Faker::Movie.quote} #{Faker::Lorem.sentence(word_count: 30, supplemental: false,
-                                                                random_words_to_add: 20)}",
+    description: "#{Faker::Movie.quote} #{Faker::Lorem.sentence(word_count: 30,
+                                                                supplemental: false, random_words_to_add: 20)}",
     released_on: Faker::Date.between(from: '1995-09-23', to: '2030-09-25')
   )
+  image_file_name = "cat#{Faker::Number.between(from: 1, to: 4)}.jpeg"
+  image = File.open(Rails.root.join("app/assets/images/#{image_file_name}"))
+  puts "Attaching image #{image_file_name} to movie"
+
+  Movie.find(id).main_image.attach(io: image, filename: image_file_name)
 end
 
 (1..10).each do |_i|

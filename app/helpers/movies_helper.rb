@@ -28,4 +28,15 @@ module MoviesHelper
 
     end
   end
+
+  def main_image(movie)
+    url = if movie.main_image.attached?
+            movie.main_image.variant(resize_to_limit: [100, 100],
+                                     monochrome: true)
+          else
+            'placeholder.png'
+          end
+    image_tag(url, class: "self-center object-cover w-auto
+      h-15", alt: 'Flix Logo')
+  end
 end

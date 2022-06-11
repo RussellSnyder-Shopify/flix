@@ -15,6 +15,8 @@ class Movie < ApplicationRecord
   has_many :characterizations, dependent: :destroy
   has_many :genres, through: :characterizations
 
+  has_one_attached :main_image
+
   validates :released_on, :duration, presence: true
   validates :title, presence: true, uniqueness: true
 
@@ -24,10 +26,7 @@ class Movie < ApplicationRecord
 
   validates :total_gross, numericality: { only_interger: true, greater_than_or_equal_to: 0 }
 
-  validates :image_file_name, format: {
-    with: /\w+\.(jpg|jpeg|png)\z/i,
-    message: 'must be a JPG or PNG image'
-  }
+  validate :acceptable_image
 
   def flop?
     total_gross.blank? || total_gross < FLOP_THRESHOLD
@@ -71,6 +70,15 @@ class Movie < ApplicationRecord
   end
 
   private
+
+  def acceptable_image
+    return unless main_image.attached?
+
+    errors.add(:main_image, 'is too big') unless main_image.blob.byte_size <= 1.megabyte
+
+    acceptable_types = ['image/jpeg', 'image/png']
+    errors.add(:main_image, 'must be a jpeg or png') unless acceptable_types.include?(main_image.content_type)
+  end
 
   def set_slug
     self.slug = title.parameterize
