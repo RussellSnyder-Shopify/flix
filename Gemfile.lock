@@ -265,6 +265,7 @@ DEPENDENCIES
   byebug
   capybara
   database_cleaner
+  database_cleaner-active_record
   factory_bot_rails
   faker
   image_processing (~> 1.2)

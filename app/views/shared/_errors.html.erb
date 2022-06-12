@@ -1,5 +1,5 @@
   <% if object.errors.any? %>
-  <section class="bg-yellow-100 p-4 grid gap-2 mb-6">
+  <section id="errors" class="bg-yellow-100 p-4 grid gap-2 mb-6">
     <h2>Form could not be saved</h2>
     <h3>Please correct the following
       <%= pluralize(object.errors.size, "error") %>:
