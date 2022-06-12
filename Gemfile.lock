@@ -120,6 +120,8 @@ GEM
       racc (~> 1.4)
     nokogiri (1.13.6-x86_64-darwin)
       racc (~> 1.4)
+    pagy (5.10.1)
+      activesupport
     public_suffix (4.0.7)
     puma (5.6.4)
       nio4r (~> 2.0)
@@ -263,6 +265,7 @@ DEPENDENCIES
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)
+  pagy (~> 5)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)

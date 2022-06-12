@@ -17,6 +17,9 @@
       </div>
     </section>
   <% end %>
+  <div class="mx-auto width-full">
+    <%== pagy_nav(@pagy) %>
+  </div>
 </div>
 <% if current_user_admin? %>
   <section class="admin mt-10">
