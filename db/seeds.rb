@@ -25,6 +25,7 @@
                                                                 supplemental: false, random_words_to_add: 20)}",
     released_on: Faker::Date.between(from: '1995-09-23', to: '2030-09-25')
   )
+
   image_file_name = "cat#{Faker::Number.between(from: 1, to: 4)}.jpeg"
   image = File.open(Rails.root.join("app/assets/images/#{image_file_name}"))
   puts "Attaching image #{image_file_name} to movie"
