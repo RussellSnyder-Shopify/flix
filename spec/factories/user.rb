@@ -1,22 +1,17 @@
 FactoryBot.define do
   factory :user do
-    name { 'user' }
-    email { 'user@user.com' }
+    name { Faker::Name.unique.name }
+    email { Faker::Internet.unique.email }
     password { 'passwordpassword' }
     role { 'User' }
-  end
+    username { Faker::Internet.unique.username }
 
-  factory :admin, class: 'User' do
-    name { 'admin' }
-    email { 'admin@admin.com' }
-    password { 'passwordpassword' }
-    role { 'Admin' }
-  end
+    factory :admin_user do
+      role { 'Admin' }
+    end
 
-  factory :super_admin, class: 'User' do
-    name { 'super_admin' }
-    email { 'super_admin@super_admin.com' }
-    password { 'passwordpassword' }
-    role { 'SuperAdmin' }
+    factory :super_admin_user do
+      role { 'SuperAdmin' }
+    end
   end
 end

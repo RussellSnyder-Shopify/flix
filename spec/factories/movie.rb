@@ -1,14 +1,23 @@
 FactoryBot.define do
   factory :movie do
-    title { Faker::Movie.unique.title }
+    title { Faker::Lorem.sentence(word_count: 5, supplemental: false, random_words_to_add: 4) }
     rating { Movie::RATINGS.sample }
     director { 'Test Movie Director' }
     duration { '6 Hours 30 Minutes' }
-    total_gross { 20_000_000 }
-    created_at { '1995-09-23' }
-    updated_at { '1995-09-23' }
+    total_gross do
+      Faker::Number.normal(mean: (Movie::HIT_THRESHOLD + Movie::FLOP_THRESHOLD) / 2, standard_deviation: 5_000_000)
+    end
     description { "lovely movie really, couldn't stop watching lalalalallalala " }
-    released_on { '1995-09-23' }
+    released_on { Faker::Date.between(from: '1995-09-23', to: '2030-09-25') }
+
+    factory :upcoming_movie do
+      title { Faker::Movie.unique.title }
+      released_on { Faker::Date.between(from: 1.year.from_now, to: 10.years.from_now) }
+    end
+
+    factory :flop_movie do
+      total_gross { Movie::FLOP_THRESHOLD - Faker::Number.between(from: 1, to: 100_000) }
+    end
   end
   #   default_date = Faker::Date.between(from: '1995-09-23', to: '2020-09-25')
 
